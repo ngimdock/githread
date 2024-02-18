@@ -1,22 +1,15 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { getAuthSession } from "@/lib/auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getAuthSession();
   return (
-    <div className="m-4 space-y-4">
-      <Button
-        variant="default"
-        onClick={() => console.log({ message: "Hello world !" })}
-      >
-        Click me
-      </Button>
+    <div>
+      <p>{JSON.stringify(session, null, 2)}</p>
+      <Button variant="default">Click me</Button>
 
       <Input placeholder="Your name" />
-
-      <Textarea placeholder="Placeholder" />
     </div>
   );
 }
