@@ -14,7 +14,7 @@ export default function Home() {
         Click me
       </Button>
 
-      <Input />
+      <Input placeholder="Your name" />
 
       <Textarea placeholder="Placeholder" />
     </div>
