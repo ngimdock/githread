@@ -57,6 +57,57 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+
+  username String 
+  bio String ?
+  
   accounts      Account[]
   sessions      Session[]
+
+  followers Follow[] @relation("follower")
+  followeds Follow[] @relation("followed")
+  posts Post[]
+  likes Like[]
+
+  createdAt DateTime @default(now())
+}
+
+model Follow {
+  id            String    @id @default(cuid())
+
+  follower User @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId String
+
+  followed User @relation("followed", fields: [followedId], references: [id], onDelete: Cascade)
+  followedId String
+
+  createdAt DateTime @default(now())
+}
+
+model Post {
+  id            String    @id @default(cuid())
+  content String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  parent Post ? @relation("comments", fields: [parentId], references: [id], onDelete: Cascade)
+  parentId String ?
+
+  replies Post[] @relation("comments")
+  likes Like[]
+  
+  createdAt DateTime @default(now())
+}
+
+model Like  {
+  id            String    @id @default(cuid())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  post Post @relation( fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+
+  createdAt DateTime @default(now())
 }
