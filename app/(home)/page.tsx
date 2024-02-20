@@ -11,7 +11,7 @@ export default async function Home() {
   const posts = await findLatestHomePosts();
 
   return (
-    <div>
+    <div className="divide-y divide-muted">
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
