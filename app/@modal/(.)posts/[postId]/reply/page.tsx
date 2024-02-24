@@ -11,8 +11,6 @@ type Props = {
 export default async function Page({ params: { postId } }: Props) {
   const user = await finduser();
 
-  console.log({ postId });
-
   return (
     <ReplyModal
       user={user}
