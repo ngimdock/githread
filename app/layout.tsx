@@ -23,7 +23,7 @@ export default function RootLayout({ children, modal }: Readonly<LayoutProps>) {
     <html lang="en" className="h-full">
       <body className={clsx(inter.className, "bg-background h-full")}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="flex flex-col h-full border">
+          <div className="flex flex-col h-full">
             <Header />
             <div className="flex-1 max-w-lg m-auto py-20 w-full">
               {children}
