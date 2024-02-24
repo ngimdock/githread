@@ -1,5 +1,7 @@
 "use client"; // Error components must be Client Components
 
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertTriangle } from "lucide-react";
 import { useEffect } from "react";
 
 export default function Error({
@@ -15,16 +17,12 @@ export default function Error({
   }, [error]);
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
-    </div>
+    <Alert className="my-4">
+      <AlertTriangle />
+      <AlertTitle>Not loggetd</AlertTitle>
+      <AlertDescription>
+        You must be logged in to access this page
+      </AlertDescription>
+    </Alert>
   );
 }
