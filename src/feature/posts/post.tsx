@@ -2,8 +2,9 @@ import { PostHomeType } from "@/src/queries/posts.query";
 import React from "react";
 import { PostLayout } from "./post-layout";
 import Link from "next/link";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Heart, MessageCircle } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
+import { LikeButton } from "./like-button";
 
 type PostProps = {
   post: PostHomeType;
@@ -17,9 +18,7 @@ export const Post = ({ post }: PostProps) => {
       </Link>
 
       <div className="flex gap-2 items-center">
-        <Button size="icon" variant="ghost">
-          <Heart size={20} />
-        </Button>
+        <LikeButton postId={post.id} isLiked={post.likes.length > 0} />
 
         <Link
           href={`/posts/${post.id}/reply`}
