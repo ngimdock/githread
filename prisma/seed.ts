@@ -14,24 +14,10 @@ const NOMBER_OF_LIKES = 200;
 const prisma = new PrismaClient();
 
 const main = async () => {
-  await prisma.$transaction(async (prismaTransactionInstance) => {
-    const users = await createRandomUsers(
-      NOMBER_OF_USERS,
-      prismaTransactionInstance
-    );
+  const users = await createRandomUsers(NOMBER_OF_USERS);
 
-    const posts = await createRandomPosts(
-      NOMBER_OF_POSTS,
-      users,
-      prismaTransactionInstance
-    );
-    await createrandomLikes(
-      NOMBER_OF_LIKES,
-      users,
-      posts,
-      prismaTransactionInstance
-    );
-  });
+  const posts = await createRandomPosts(NOMBER_OF_POSTS, users);
+  await createrandomLikes(NOMBER_OF_LIKES, users, posts);
 };
 
 main()
@@ -46,9 +32,11 @@ main()
 
 async function createRandomUsers(
   nomberOfUsers: number,
-  prismaTransaction: PrimaTransactionType
+  prismaTransaction?: PrimaTransactionType
 ): Promise<User[]> {
   const users = [];
+
+  const prismaInstance = prismaTransaction ? prismaTransaction : prisma;
 
   for (let i = 1; i <= nomberOfUsers; i++) {
     const user: Prisma.UserCreateInput = {
@@ -59,7 +47,7 @@ async function createRandomUsers(
       bio: faker.lorem.paragraph(),
     };
 
-    const createdUser = await prismaTransaction.user.create({ data: user });
+    const createdUser = await prismaInstance.user.create({ data: user });
 
     users.push(createdUser);
   }
@@ -70,9 +58,11 @@ async function createRandomUsers(
 async function createRandomPosts(
   nomberOfPosts: number,
   users: User[],
-  prismaTransaction: PrimaTransactionType
+  prismaTransaction?: PrimaTransactionType
 ): Promise<Post[]> {
   const posts = [];
+
+  const prismaInstance = prismaTransaction ? prismaTransaction : prisma;
 
   for (let i = 1; i <= nomberOfPosts; i++) {
     const randomUserIndex = faker.number.int({
@@ -90,7 +80,7 @@ async function createRandomPosts(
       userId: users[randomUserIndex].id,
     };
 
-    const createdPost = await prismaTransaction.post.create({ data: post });
+    const createdPost = await prismaInstance.post.create({ data: post });
 
     posts.push(createdPost);
   }
@@ -102,8 +92,10 @@ async function createrandomLikes(
   nomberOfLikes: number,
   users: User[],
   posts: Post[],
-  prismatransaction: PrimaTransactionType
+  prismaTransaction?: PrimaTransactionType
 ): Promise<void> {
+  const prismaInstance = prismaTransaction ? prismaTransaction : prisma;
+
   for (let i = 1; i <= nomberOfLikes; i++) {
     const randomUserIndex = faker.number.int({
       min: 0,
@@ -120,6 +112,6 @@ async function createrandomLikes(
       postId: posts[randomPostIndex].id,
     };
 
-    await prismatransaction.like.create({ data: like });
+    await prismaInstance.like.create({ data: like });
   }
 }
