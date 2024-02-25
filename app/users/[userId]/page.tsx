@@ -6,6 +6,21 @@ import { notFound, redirect } from "next/navigation";
 import { followUser, userIsFollowing } from "./follow.action";
 import { Button } from "@/components/ui/button";
 import { Post } from "@/src/feature/posts/post";
+import { Metadata } from "next";
+
+export const generateMetadata = async ({
+  params: { userId },
+}: UserPageProps): Promise<Metadata> => {
+  console.log({ userId });
+
+  const user = await findUserProfile(userId);
+
+  if (!user) throw new Error("User not found");
+
+  return {
+    title: ` ${user.name} - (${user.username})`,
+  };
+};
 
 type UserPageProps = {
   params: {

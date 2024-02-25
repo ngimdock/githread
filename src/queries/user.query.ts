@@ -2,6 +2,7 @@ import { getAuthRequiredSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
 import { postSelectQuery } from "./posts.query";
+import { cache } from "react";
 
 export const finduser = async () => {
   const { user } = await getAuthRequiredSession();
@@ -15,7 +16,7 @@ export const finduser = async () => {
   return userDatabase;
 };
 
-export const findUserProfile = async (userId: string) => {
+export const findUserProfile = cache(async (userId: string) => {
   return prisma.user.findFirst({
     where: {
       OR: [
@@ -57,7 +58,7 @@ export const findUserProfile = async (userId: string) => {
       },
     },
   });
-};
+});
 
 export const findUserEdit = async () => {
   const session = await getAuthRequiredSession();
