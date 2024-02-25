@@ -27,8 +27,6 @@ export default async function UserPage({ params: { userId } }: UserPageProps) {
 
   if (userToFollowIsCurrentUser) redirect("/profile");
 
-  console.log({ currentUserIsFollowing });
-
   return (
     <Profile user={user}>
       <form className="mt-4">

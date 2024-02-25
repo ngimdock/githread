@@ -32,7 +32,7 @@ export const PostLayout = ({
       </Avatar>
 
       <div className="w-full ml-4 flex flex-col gap-2">
-        <Link href={`/users/${user.id}`}>
+        <Link href={`/users/${user.username ?? user.id}`}>
           <div className="flex flex-row gap-2 items-center">
             <p className="text-sm text-card-foreground mr-auto">
               {user.username}

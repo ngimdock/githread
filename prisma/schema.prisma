@@ -60,6 +60,7 @@ model User {
 
   username String 
   bio String ?
+  link String?
   
   accounts      Account[]
   sessions      Session[]

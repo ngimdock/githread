@@ -37,33 +37,34 @@ export const findpost = ({ postId, userId }: PostParams) => {
 };
 
 /**Refactor queries */
-export const postSelectQuery = (userId?: string): Prisma.PostSelect => ({
-  id: true,
-  content: true,
-  createdAt: true,
-  user: {
-    select: {
-      id: true,
-      username: true,
-      image: true,
+export const postSelectQuery = (userId?: string) =>
+  ({
+    id: true,
+    content: true,
+    createdAt: true,
+    user: {
+      select: {
+        id: true,
+        username: true,
+        image: true,
+      },
     },
-  },
-  likes: {
-    where: {
-      userId: userId ?? "error",
+    likes: {
+      where: {
+        userId: userId ?? "error",
+      },
+      select: {
+        userId: true,
+      },
     },
-    select: {
-      userId: true,
-    },
-  },
 
-  _count: {
-    select: {
-      likes: true,
-      replies: true,
+    _count: {
+      select: {
+        likes: true,
+        replies: true,
+      },
     },
-  },
-});
+  } satisfies Prisma.PostSelect);
 
 /** Query types */
 

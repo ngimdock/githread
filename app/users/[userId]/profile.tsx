@@ -1,6 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserProfileType } from "@/src/queries/user.query";
+import Link from "next/link";
 import React, { PropsWithChildren } from "react";
+
+const removeHttp = (url: string) => {
+  return url.replace(/(^\w+:|^)\/\//, "");
+};
 
 type ProfileProps = PropsWithChildren<{
   user: UserProfileType;
@@ -37,6 +42,18 @@ export const Profile = ({ user, children }: ProfileProps) => {
         <p className="text- text-muted-foreground text-xs">
           {user._count.followeds} followers
         </p>
+
+        {user.link ? (
+          <>
+            <p className="text-muted-foreground">{" ‧ "}</p>
+            <Link
+              className="text-muted-foreground hover:underline text-sm"
+              href={user.link}
+            >
+              {removeHttp(user.link)}
+            </Link>
+          </>
+        ) : null}
       </div>
       {children}
     </div>

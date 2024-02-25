@@ -19,10 +19,8 @@ export default function Error({
   return (
     <Alert className="my-4">
       <AlertTriangle />
-      <AlertTitle>Not loggetd</AlertTitle>
-      <AlertDescription>
-        You must be logged in to access this page
-      </AlertDescription>
+      <AlertTitle>Something went wrong!</AlertTitle>
+      <AlertDescription>Please try again</AlertDescription>
     </Alert>
   );
 }
