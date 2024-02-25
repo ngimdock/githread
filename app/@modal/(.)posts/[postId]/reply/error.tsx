@@ -21,13 +21,16 @@ export default function Error({
   const pathname = usePathname();
 
   return (
-    <Dialog open={pathname === "/write"} onOpenChange={() => router.back()}>
+    <Dialog
+      open={pathname?.includes("/reply")}
+      onOpenChange={() => router.back()}
+    >
       <DialogContent>
         <Alert className="my-4">
           <AlertTriangle />
           <AlertTitle>Not logged</AlertTitle>
           <AlertDescription>
-            You must be logged in to create a new tweet
+            You must be logged in to reply this tweet
           </AlertDescription>
         </Alert>
       </DialogContent>
