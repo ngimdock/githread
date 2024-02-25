@@ -30,29 +30,27 @@ export default async function UserPage({ params: { userId } }: UserPageProps) {
   console.log({ currentUserIsFollowing });
 
   return (
-    <div>
-      <Profile user={user}>
-        <form className="mt-4">
-          <Button
-            formAction={async () => {
-              "use server";
+    <Profile user={user}>
+      <form className="mt-4">
+        <Button
+          formAction={async () => {
+            "use server";
 
-              if (!session.user) return;
+            if (!session.user) return;
 
-              await followUser(userId);
-            }}
-            variant="outline"
-          >
-            {!!currentUserIsFollowing ? "Unfollow" : "Follow"}
-          </Button>
-        </form>
+            await followUser(userId);
+          }}
+          variant="outline"
+        >
+          {!!currentUserIsFollowing ? "Unfollow" : "Follow"}
+        </Button>
+      </form>
 
-        <div className="divide-y divide-accent mt-4 border-t border-accent">
-          {user.posts.map((post) => (
-            <Post post={post} key={post.id} />
-          ))}
-        </div>
-      </Profile>
-    </div>
+      <div className="divide-y divide-accent mt-4 border-t border-accent">
+        {user.posts.map((post) => (
+          <Post post={post} key={post.id} />
+        ))}
+      </div>
+    </Profile>
   );
 }
