@@ -27,18 +27,12 @@ export const Post = ({ post }: PostProps) => {
           <MessageCircle size={20} />
         </Link>
       </div>
-      <div>
-        <Link
-          className="text-sm text-muted-foreground"
-          href={`/posts/${post.id}`}
-        >
+      <div className="text-xs">
+        <Link className="text-muted-foreground" href={`/posts/${post.id}`}>
           {post._count.likes} likes
         </Link>
         <span className="text-xs">{" • "}</span>
-        <Link
-          className="text-sm text-muted-foreground"
-          href={`/posts/${post.id}`}
-        >
+        <Link className="text-muted-foreground" href={`/posts/${post.id}`}>
           {post._count.replies} comments
         </Link>
       </div>

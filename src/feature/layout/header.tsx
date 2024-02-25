@@ -14,7 +14,7 @@ export const Header = async () => {
       <div className="  container flex items-center py-2 max-w-lg m-auto gap-1">
         <div className="mr-auto">
           <Link href="/">
-            <h2 className="text-2xl font-bold">Githread</h2>
+            <h2 className="text-2xl font-bold">.yz</h2>
           </Link>
         </div>
         {session?.user ? <UserProfile /> : <LoginButton />}

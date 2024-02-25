@@ -9,7 +9,7 @@ import { Footer } from "@/src/feature/layout/footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Githread",
+  title: ".yz",
   description: "The social network for developers",
 };
 

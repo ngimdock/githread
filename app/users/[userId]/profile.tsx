@@ -49,6 +49,7 @@ export const Profile = ({ user, children }: ProfileProps) => {
             <Link
               className="text-muted-foreground hover:underline text-sm"
               href={user.link}
+              target="_blank"
             >
               {removeHttp(user.link)}
             </Link>

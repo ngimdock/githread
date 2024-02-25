@@ -15,9 +15,12 @@ export const LikeButton = ({ postId, isLiked }: LikeButtonProps) => {
 
   return (
     <button
-      className={clsx("rounded-md hover:bg-accent flex gap-1 items-center", {
-        "text-red-500": isLiked,
-      })}
+      className={clsx(
+        "rounded-md p-2 hover:bg-accent flex gap-1 items-center",
+        {
+          "text-red-500": isLiked,
+        }
+      )}
       onClick={() => startTransition(() => likePost(postId))}
     >
       {isPending ? <Loader size={20} /> : <Heart size={20} />}
