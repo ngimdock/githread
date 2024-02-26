@@ -16,7 +16,7 @@ export const LikeButton = ({ postId, isLiked }: LikeButtonProps) => {
   return (
     <button
       className={clsx(
-        "rounded-md p-2 hover:bg-accent flex gap-1 items-center",
+        "rounded-md p-2 hover:bg-accent flex gap-1 items-center ",
         {
           "text-red-500": isLiked,
         }
